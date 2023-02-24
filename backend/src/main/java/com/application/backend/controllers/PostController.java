@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.application.backend.models.PostModel;
 import com.application.backend.services.PostService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("api/v0/post")
 @CrossOrigin(origins = "*")
+@Slf4j
 public class PostController {
 	
 	@Autowired
@@ -27,26 +30,31 @@ public class PostController {
 
 	@GetMapping("/all")
 	public List<PostModel> getAll(){
+		log.info("Get all service");
 		return service.getPosts();
 	}
 
 	@GetMapping("/{id}")
 	public Optional<PostModel> getById(@PathVariable("id") long id){
+		log.info("Get by id service");
 		return service.getPostDetails(id);
 	}
 
 	@PostMapping("/new")
 	public PostModel create(@RequestBody PostModel post){
+		log.info("Create service");
 		return service.savePost(post);
 	}
 
 	@PutMapping("/update")
 	public PostModel update(@RequestBody PostModel post){
+		log.info("Update service");
 		return service.savePost(post);
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public boolean delete(@PathVariable("id") long id){
+		log.info("Delete service");
 		return service.deletePost(id);
 	}
 }

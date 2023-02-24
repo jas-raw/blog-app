@@ -17,10 +17,14 @@ const HomePosts = () => {
 		navigate("details");
 	}
 
+	const loadPosts = async () => {
+		stateModifier({loading: true});
+		const data = await apiProvider.getAllPosts()
+		stateModifier({loading: false, posts: data});
+	}
+
 	useEffect(() => {
-		stateModifier({loading: true})
-		apiProvider.getAllPosts()
-		.then(data => stateModifier({loading: false, posts: data}))
+		loadPosts();
 	}, [])
 	
 	return (
@@ -33,6 +37,20 @@ const HomePosts = () => {
 						</div>
 					</div>
 				))
+			}
+			{
+				posts.length === 0 && (
+					<div className='text-center center-grid'>
+						<div className='row'>
+							<div className='row'>
+								<span className='h2'>No posts to show</span>
+							</div>
+							<div className='row'>
+								<a className='navbar-brand' onClick={loadPosts}>Reload</a>
+							</div>
+						</div>
+					</div>
+				)
 			}
 		</main>
 	)
