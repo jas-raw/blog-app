@@ -1,0 +1,20 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    container_name: postgresdb
+    user: "1000:50"
+    volumes:
+      - ./PostgresData:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: blog
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 5432:5432
+    networks: 
+      - blog
+
+networks: 
+  blog:
+    driver: bridge
