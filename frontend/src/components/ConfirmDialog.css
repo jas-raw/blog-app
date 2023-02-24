@@ -1,0 +1,8 @@
+.bg-confirm{
+	background-color: aliceblue;
+	border-radius: 10px;
+	min-width: 400px;
+	min-height: 150px;
+	text-align: center;
+	color: black;
+}
